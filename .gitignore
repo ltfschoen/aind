@@ -7,6 +7,8 @@
 .idea/tasks.xml
 .idea/dataSources.ids
 .idea/datasources.xml
+.idea/markdown-navigator.xml
+.idea/markdown-navigator/
 *.iws
 
 # Byte-compiled / optimized / DLL files
