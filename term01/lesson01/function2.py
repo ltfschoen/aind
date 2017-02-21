@@ -265,7 +265,9 @@ result = grid_values(unsolved_puzzle)
 vis = display(result)
 output = eliminate(result)
 print(output)
-output2 = only_choice(output)
+# output2 = only_choice(output)
+output2 = reduce_puzzle(output)
+print(output2)
 
 """ Sample Output:
   45   4578   3   |  9     2     17  |  6    5789   57
