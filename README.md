@@ -26,3 +26,4 @@ Run Apps
 * Sudoku (uses '123456789' for boxes where value not yet known, and for each box with only one value possibility,
 for each of its peers it removes that value from the remaining list of possibilities
 `python ./term01/lesson01/function2.py`
+* Project 1 https://github.com/ltfschoen/AIND-Sudoku

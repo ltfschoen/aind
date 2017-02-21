@@ -64,7 +64,17 @@ Output:
         square_units[0] = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
 """
 
-unitlist = row_units + column_units + square_units
+# Diagonals Units
+
+# Option 1: Using zip function
+# diagonal_units1 = [a[0]+a[1] for a in zip(rows, cols)]
+# diagonal_units2 = [a[0]+a[1] for a in zip(rows, cols[::-1])]
+
+# Option 2: More easily understood
+diagonal_units1 = [[rows[i]+cols[i] for i in range(9)]]
+diagonal_units2 = [[rows[i]+cols[8-i] for i in range(9)]]
+
+unitlist = row_units + column_units + square_units + diagonal_units1 + diagonal_units2
 units = dict((s, [u for u in unitlist if s in u]) for s in boxes)
 peers = dict((s, set(sum(units[s],[]))-set([s])) for s in boxes)
 

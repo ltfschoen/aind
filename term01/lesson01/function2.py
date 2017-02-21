@@ -7,6 +7,7 @@ import copy
 # Board
 easy_unsolved_puzzle = '..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..'
 hard_unsolved_puzzle = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
+diagonal_unsolved_puzzle = '2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3'
 
 def grid_values(grid):
     """ Convert grid string of a Sudoku puzzle into a {<box>: <value>}
@@ -31,14 +32,14 @@ def grid_values(grid):
     """
     #    # Course Solution:
     #    values = []
-    #        all_digits = '123456789'
-    #        for c in grid:
-    #            if c == '.':
-    #                values.append(all_digits)
-    #            elif c in all_digits:
-    #                values.append(c)
-    #        assert len(values) == 81
-    #        return dict(zip(boxes, values))
+    #    all_digits = '123456789'
+    #    for c in grid:
+    #        if c == '.':
+    #            values.append(all_digits)
+    #        elif c in all_digits:
+    #            values.append(c)
+    #    assert len(values) == 81
+    #    return dict(zip(boxes, values))
 
     # My Solution
     result = dict(map(lambda x: x, zip(boxes, grid)))
@@ -300,6 +301,7 @@ def run(puzzle_with_difficulty):
 
 run(easy_unsolved_puzzle)
 run(hard_unsolved_puzzle)
+run(diagonal_unsolved_puzzle)
 
 """ Sample Output:
   45   4578   3   |  9     2     17  |  6    5789   57
