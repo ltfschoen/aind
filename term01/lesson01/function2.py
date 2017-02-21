@@ -1,5 +1,5 @@
 import sys; assert sys.version_info >= (3,6,0)
-from utils import display, boxes
+from utils import display, boxes, unitlist
 from utils import peers
 import functools
 import copy
@@ -157,80 +157,80 @@ def only_choice(values):
     Output: Resulting Sudoku in dictionary form after filling in Only Choices.
     """
 
-    # # Course Solution:
-    # for unit in unitlist:
-    #     for digit in '123456789':
-    #         dplaces = [box for box in unit if digit in values[box]]
-    #         if len(dplaces) == 1:
-    #             values[dplaces[0]] = digit
-    # return values
+    # Course Solution:
+    for unit in unitlist:
+        for digit in '123456789':
+            dplaces = [box for box in unit if digit in values[box]]
+            if len(dplaces) == 1:
+                values[dplaces[0]] = digit
+    return values
 
-    # My Solution (Marked Incorrect):
-
-    # print("values: ", values)
-
-    latest_dict = copy.deepcopy(values)
-    temp_dict = copy.deepcopy(values)
-    update_dict = values
-    for box, val in update_dict.items():
-        # SQUARE BOX - get all boxes that are within the same unit/square as the given box
-        # print("box: ", box)
-        boxes_in_same_square_as_box = get_boxes_in_unit(box, boxes)
-        # print("boxes in same square: ", boxes_in_same_square_as_box)
-
-        # create deep copy of original dict and remove any boxes that are not in square of current box
-        copy_update_dict = copy.deepcopy(update_dict)
-        for k in update_dict:
-            if not k in boxes_in_same_square_as_box:
-                del copy_update_dict[k]
-        # print(copy_update_dict)
-
-        # create deep copy of dict containing all boxes in square and remove any boxes with only 1 value
-        square_dict = copy.deepcopy(copy_update_dict)
-        for k in copy_update_dict:
-            if len(copy_update_dict[k]) == 1:
-                del square_dict[k]
-        # print("square_dict with unsolved boxes: ", square_dict)
-
-        if len(square_dict) != 0:
-            # create list of all the values (including duplicates) from unsolved boxes in current square
-            unsolved_boxes_keys = []
-            unsolved_boxes_values = []
-            for k, v in square_dict.items():
-                unsolved_boxes_keys.append(k)
-                unsolved_boxes_values.append(v)
-            # print(unsolved_boxes_keys)
-            # print(unsolved_boxes_values)
-            all_unsolved_boxes_values = functools.reduce(lambda x,y: x+y, unsolved_boxes_values)
-            # print("all_unsolved_boxes_values: ", all_unsolved_boxes_values)
-
-            list_unresolved = list(all_unsolved_boxes_values)
-            uniq = set(list_unresolved)
-            # print("uniq: ", uniq)
-            only_ones = [] # there may be more than one box in a square having a value that only occurs
-            # once in unsolved boxes of that square
-            for u in uniq:
-                if all_unsolved_boxes_values.count(u) == 1:
-                    only_ones.append(u)
-            # print("only ones: ", only_ones)
-
-            # update relevant boxes in temp_dict to be returned (overwrite the remaining possibilities with
-            # the only one for that box
-            temp_dict = latest_dict
-            for k, v in latest_dict.items():
-                if k in unsolved_boxes_keys:
-                    for o in only_ones:
-                        if o in v:
-                            # print("only one: ", o)
-                            # print("v is: ", v)
-                            index_of_only_one = only_ones.index(o)
-                            # print("index of only one: ", index_of_only_one)
-                            temp_dict[k] = only_ones[index_of_only_one]
-            latest_dict = temp_dict
-            # print("updated latest_dict: ", latest_dict)
-
-    print(latest_dict)
-    return latest_dict
+    # # My Solution (Marked Incorrect):
+    #
+    # # print("values: ", values)
+    #
+    # latest_dict = copy.deepcopy(values)
+    # temp_dict = copy.deepcopy(values)
+    # update_dict = values
+    # for box, val in update_dict.items():
+    #     # SQUARE BOX - get all boxes that are within the same unit/square as the given box
+    #     # print("box: ", box)
+    #     boxes_in_same_square_as_box = get_boxes_in_unit(box, boxes)
+    #     # print("boxes in same square: ", boxes_in_same_square_as_box)
+    #
+    #     # create deep copy of original dict and remove any boxes that are not in square of current box
+    #     copy_update_dict = copy.deepcopy(update_dict)
+    #     for k in update_dict:
+    #         if not k in boxes_in_same_square_as_box:
+    #             del copy_update_dict[k]
+    #     # print(copy_update_dict)
+    #
+    #     # create deep copy of dict containing all boxes in square and remove any boxes with only 1 value
+    #     square_dict = copy.deepcopy(copy_update_dict)
+    #     for k in copy_update_dict:
+    #         if len(copy_update_dict[k]) == 1:
+    #             del square_dict[k]
+    #     # print("square_dict with unsolved boxes: ", square_dict)
+    #
+    #     if len(square_dict) != 0:
+    #         # create list of all the values (including duplicates) from unsolved boxes in current square
+    #         unsolved_boxes_keys = []
+    #         unsolved_boxes_values = []
+    #         for k, v in square_dict.items():
+    #             unsolved_boxes_keys.append(k)
+    #             unsolved_boxes_values.append(v)
+    #         # print(unsolved_boxes_keys)
+    #         # print(unsolved_boxes_values)
+    #         all_unsolved_boxes_values = functools.reduce(lambda x,y: x+y, unsolved_boxes_values)
+    #         # print("all_unsolved_boxes_values: ", all_unsolved_boxes_values)
+    #
+    #         list_unresolved = list(all_unsolved_boxes_values)
+    #         uniq = set(list_unresolved)
+    #         # print("uniq: ", uniq)
+    #         only_ones = [] # there may be more than one box in a square having a value that only occurs
+    #         # once in unsolved boxes of that square
+    #         for u in uniq:
+    #             if all_unsolved_boxes_values.count(u) == 1:
+    #                 only_ones.append(u)
+    #         # print("only ones: ", only_ones)
+    #
+    #         # update relevant boxes in temp_dict to be returned (overwrite the remaining possibilities with
+    #         # the only one for that box
+    #         temp_dict = latest_dict
+    #         for k, v in latest_dict.items():
+    #             if k in unsolved_boxes_keys:
+    #                 for o in only_ones:
+    #                     if o in v:
+    #                         # print("only one: ", o)
+    #                         # print("v is: ", v)
+    #                         index_of_only_one = only_ones.index(o)
+    #                         # print("index of only one: ", index_of_only_one)
+    #                         temp_dict[k] = only_ones[index_of_only_one]
+    #         latest_dict = temp_dict
+    #         # print("updated latest_dict: ", latest_dict)
+    #
+    # print(latest_dict)
+    # return latest_dict
 
 # Visualisation of Sudoku puzzle generated in dictionary form
 result = grid_values(unsolved_puzzle)
