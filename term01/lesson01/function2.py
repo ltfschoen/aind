@@ -5,7 +5,8 @@ import functools
 import copy
 
 # Board
-unsolved_puzzle = '..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..'
+easy_unsolved_puzzle = '..3.2.6..9..3.5..1..18.64....81.29..7.......8..67.82....26.95..8..2.3..9..5.1.3..'
+hard_unsolved_puzzle = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
 
 def grid_values(grid):
     """ Convert grid string of a Sudoku puzzle into a {<box>: <value>}
@@ -234,7 +235,7 @@ def only_choice(values):
 
 def reduce_puzzle(values):
     """
-    Constraint Propagation Technique applied.
+    Constraint Propagation and Only Choice Techniques applied.
     Input: Unsolved Sudoku puzzle as dict
     Process: Apply repeatedly the eliminate() and only_choice() functions
     as constraints. Stop and return puzzle when solved. Exit loop by returning
@@ -260,14 +261,45 @@ def reduce_puzzle(values):
             return False
     return values
 
-# Visualisation of Sudoku puzzle generated in dictionary form
-result = grid_values(unsolved_puzzle)
-vis = display(result)
-output = eliminate(result)
-print(output)
-# output2 = only_choice(output)
-output2 = reduce_puzzle(output)
-print(output2)
+def search(values):
+    """
+    Use Depth-First Search (DFS) and Constraint Propagation,
+    create a search tree and solve the Sudoku.
+    """
+    # First, reduce the puzzle with using the reduce_puzzle function
+    values = reduce_puzzle(values)
+    if values is False:
+        return False # Failed
+    if all(len(values[s]) == 1 for s in boxes):
+        return values # Solved!
+
+    # Choose one of the unfilled squares with the fewest possibilities
+    # and extract the n,s (i.e. 2 possibilities at 'A' would return: 2, 'A')
+    n,s = min((len(values[s]), s) for s in boxes if len(values[s]) > 1)
+
+    # Now use recursion to solve each one of the resulting Sudokus,
+    # and if one returns a value (not False), return that answer!
+    # i.e. loop for 8 and 9 when possibilities for a box is 89
+    for value in values[s]:
+        new_sudoku = values.copy() # copy of latest Sudoku puzzle with updates from calling reduce_puzzle function
+        new_sudoku[s] = value # modify copy (new search tree branch) with attempt at trying reduced possibility of 8
+        attempt = search(new_sudoku) # recursion using modified copy with new tree branch attempt
+        if attempt: # if does not return False or None from modified copy it returns the values from the attempt
+            return attempt
+
+def run(puzzle_with_difficulty):
+    # Visualisation of Sudoku puzzle generated in dictionary form
+    result = grid_values(puzzle_with_difficulty)
+    vis = display(result)
+    output = eliminate(result)
+    print(output)
+    # output2 = only_choice(output)
+    # output2 = reduce_puzzle(output)
+    output2 = search(output)
+    print(output2)
+
+run(easy_unsolved_puzzle)
+run(hard_unsolved_puzzle)
 
 """ Sample Output:
   45   4578   3   |  9     2     17  |  6    5789   57
