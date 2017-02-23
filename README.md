@@ -26,4 +26,14 @@ Run Apps
 * Sudoku (uses '123456789' for boxes where value not yet known, and for each box with only one value possibility,
 for each of its peers it removes that value from the remaining list of possibilities
 `python ./term01/lesson01/function2.py`
-* Project 1 https://github.com/ltfschoen/AIND-Sudoku
+* Refer to separate Project 1 https://github.com/ltfschoen/AIND-Sudoku
+
+Run MyPy Lint (Static Type Checking)
+------------------------------------
+* Install MyPy `python3 -m pip install mypy`.
+* Install Typing `python3 -m pip install typing`.
+* Import Typing `import typing; from typing import *`,
+* Apply MyPy static type checking to an existing function and check that expected warnings occur
+`def get_list_for_str(word: str) -> None:`
+* Run MyPy Linter with `mypy ./mypy/test.py`
+* Apply MyPy with expected types so no warnings occur `def get_list_for_str(word: str) -> typing.List[str]:`
