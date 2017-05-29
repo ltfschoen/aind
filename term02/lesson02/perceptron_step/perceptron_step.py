@@ -77,6 +77,11 @@ def trainPerceptronAlgorithm(X, y, learn_rate = 0.01, num_epochs = 25):
     for i in range(num_epochs):
         # In each epoch, we apply the perceptron step.
         W, b = perceptronStep(X, y, W, b, learn_rate)
+        # x = np.linspace(-1,1),
+        # line1 = W[0] * x + b
+        # plt.plot(x[0], line1[0], 'g-')
+        # line2 = W[1] * x + b
+        # plt.plot(x[0], line2[0], 'g-')
         boundary_lines.append((-W[0]/W[1], -b/W[1]))
     return boundary_lines
 
