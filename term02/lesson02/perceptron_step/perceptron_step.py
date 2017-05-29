@@ -66,6 +66,10 @@ def trainPerceptronAlgorithm(X, y, learn_rate = 0.01, num_epochs = 25):
     Adjust Learning Rate and Epochs to see different results.
     """
 
+    print("X type: ", X.shape) # (2, 99)
+    print("y type: ", y.shape) # (99,)
+    X = X.T # convert to shape (99, 2)
+
     # Note: .T access the attribute T (transpose) of the object (a NumPy array)
     # https://stackoverflow.com/questions/5741372/syntax-in-python-t
     x_min, x_max = min(X.T[0]), max(X.T[0])
@@ -77,12 +81,15 @@ def trainPerceptronAlgorithm(X, y, learn_rate = 0.01, num_epochs = 25):
     for i in range(num_epochs):
         # In each epoch, we apply the perceptron step.
         W, b = perceptronStep(X, y, W, b, learn_rate)
-        # x = np.linspace(-1,1),
-        # line1 = W[0] * x + b
-        # plt.plot(x[0], line1[0], 'g-')
-        # line2 = W[1] * x + b
-        # plt.plot(x[0], line2[0], 'g-')
-        boundary_lines.append((-W[0]/W[1], -b/W[1]))
+        y_tuple = (-W[0]/W[1], -b/W[1])
+
+        x = np.linspace(-1,1)
+        line = -W[0]/W[1] * x -b/W[1]
+
+        # Plot the Boundary Lines
+        plt.plot(x, line, 'g-')
+
+        boundary_lines.append(y_tuple)
     return boundary_lines
 
 dataset_location_local = "data.csv"
@@ -93,17 +100,17 @@ df = pd.read_csv(dataset_location_local, nrows=None)
 dataset_labels = "X1,X2,y"
 df.columns = [str(label) for label in dataset_labels.split(',') if label]
 X = np.array([df['X1'], df['X2']])
+y = np.array(df['y'])
+
+plt.ylim((-1,1))
 
 # List of Tuples returned
-res = trainPerceptronAlgorithm(X, df['y'], 0.01, 25)
+res = trainPerceptronAlgorithm(X, y, 0.01, 25)
 print(res)
 
 # Plot the list of Tuples returned
 x_val = [x[0] for x in res]
 y_val = [x[1] for x in res]
-
-# Plot the returned Boundary Lines
-plt.plot(x_val,y_val, 'go') # use '-' for line
 
 X1_0 = df.loc[df['y'] == 0, 'X1']
 X1_1 = df.loc[df['y'] == 1, 'X1']
@@ -111,6 +118,6 @@ X2_0 = df.loc[df['y'] == 0, 'X2']
 X2_1 = df.loc[df['y'] == 1, 'X2']
 
 # Plot Input Data
-plt.plot(X1_0, X2_0, 'bo')
-plt.plot(X1_1, X2_1, 'ro')
+plt.plot(X1_0, X2_0, 'ro')
+plt.plot(X1_1, X2_1, 'bo')
 plt.show()
