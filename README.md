@@ -27,6 +27,11 @@ Run Apps
 for each of its peers it removes that value from the remaining list of possibilities
 `python ./term01/lesson01/function2.py`
 * Refer to separate Project 1 https://github.com/ltfschoen/AIND-Sudoku
+* Perceptron Step:
+`cd ./term02/lesson02/perceptron_step; python perceptron_step.py`
+
+    ![alt tag](https://raw.githubusercontent.com/ltfschoen/aind/master/screenshots/perceptron_step.png)
+
 
 Run MyPy Lint (Static Type Checking)
 ------------------------------------

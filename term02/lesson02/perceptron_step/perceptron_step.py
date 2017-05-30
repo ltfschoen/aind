@@ -10,7 +10,7 @@ def stepFunction(t):
     """
     Return Step
     """
-    if np.mean(t) >= 0:
+    if t >= 0:
         return 1
     return 0
 
@@ -19,9 +19,6 @@ def prediction(X, W, b):
     Returns Dot Product of X and W
     """
 
-    # Reshape as say (99,1) instead of (99,)
-    X = np.reshape(X,(len(X),1))
-    W = W.T
     return stepFunction((np.matmul(X,W)+b)[0])
 
 def perceptronStep(X, y, W, b, learn_rate = 0.01):
