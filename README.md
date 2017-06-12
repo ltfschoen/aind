@@ -40,6 +40,13 @@ for each of its peers it removes that value from the remaining list of possibili
 
     ![alt tag](https://raw.githubusercontent.com/ltfschoen/aind/master/screenshots/logistic_regression.png)
 
+* Neural Network XOR using Keras
+
+    ```
+    pip install keras
+    pip install tensorflow
+    cd ./term02/lesson02/part30_keras_neural_network_xor; python neural_network.py
+    ```
 
 Run MyPy Lint (Static Type Checking)
 ------------------------------------
