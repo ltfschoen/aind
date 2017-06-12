@@ -78,6 +78,7 @@ def trainPerceptronAlgorithm(X, y, learn_rate = 0.01, num_epochs = 25):
     for i in range(num_epochs):
         # In each epoch, we apply the perceptron step.
         W, b = perceptronStep(X, y, W, b, learn_rate)
+
         y_tuple = (-W[0]/W[1], -b/W[1])
 
         x = np.linspace(-1,1)

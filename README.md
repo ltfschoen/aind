@@ -28,9 +28,17 @@ for each of its peers it removes that value from the remaining list of possibili
 `python ./term01/lesson01/function2.py`
 * Refer to separate Project 1 https://github.com/ltfschoen/AIND-Sudoku
 * Perceptron Step:
-`cd ./term02/lesson02/perceptron_step; python perceptron_step.py`
+
+    `cd ./term02/lesson02/perceptron_step; python perceptron_step.py`
 
     ![alt tag](https://raw.githubusercontent.com/ltfschoen/aind/master/screenshots/perceptron_step.png)
+
+
+* Logistic Regression (Gradient Descent Algorithm)
+
+    `cd ./term02/lesson02/logistic_regression; python logistic_regression.py`
+
+    ![alt tag](https://raw.githubusercontent.com/ltfschoen/aind/master/screenshots/logistic_regression.png)
 
 
 Run MyPy Lint (Static Type Checking)
