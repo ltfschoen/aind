@@ -1,3 +1,7 @@
+# References:
+# - Keras Multi-Layer Perceptron https://github.com/fchollet/keras/blob/master/examples/mnist_mlp.py
+# - Keras Sequential https://keras.io/getting-started/sequential-model-guide/
+
 import numpy as np
 from keras.utils import np_utils
 import tensorflow as tf
@@ -14,43 +18,48 @@ y = np.array([[0],[1],[1],[0]]).astype('float32')
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Flatten
 
-# One-hot encoding the output
+# Convert labels to categorical one-hot encoding the output
 y = np_utils.to_categorical(y)
 
 # Create Sequential Model with Sequential() wrapper for neural network model
 # to provide common functions like fit(), evaluate(), compile()
 xor = Sequential()
 
-# Add Keras Layers (neural network layers including fully connected,
+# Add Keras Layers (neural network layers including
+# fully connected (i.e. Flatten(), Dense()),
 # max pool, and activation layers) using function add()
 
-# 1st Layer - Add NN Layer with input data of size: 8 and nodes (dimensions): 2
+# 1st Layer - Add Hidden Layer with input data of size: 8 and nodes (dimensions): 2
 #   Note: Only required to set input dimensions for first layer since Keras infers shape of remainder
-#   Hint: This next line is where you can change the size of the first hidden layer, it's current size is 8
 xor.add(Dense(8, input_dim=2))
 
-# 2nd Layer - Add sigmoid activation layer
-#   Hint: This next line is where you can change the activation function to "relu"
+# 2nd Layer - Add sigmoid activation function layer (i.e. relu, sigmoid, softmax, tanh)
 xor.add(Activation("sigmoid"))
 
-# 3rd Layer - Add fully connected layer with 2 nodes (dimensions)
+# 3rd Layer - Add fully connected layer with 2 nodes (dimensions) since output has 2 classes
 #   Note: 3rd layer (last layer output of model) takes output of 1st/2nd Layer
 #         and sets output dimensions
 xor.add(Dense(2))
 
-# 4th Layer - Add sigmoid activation layer
-xor.add(Activation("sigmoid"))
+# 4th Layer - Add sigmoid activation function layer
+xor.add(Activation("softmax"))
 
+# Configure the learning process prior to Training the model.
 # Compile the previously built model
-#   - Loss Function             - categorical_crossentropy
-#   - Optimiser                 - adam
-#   - Metrics (to evaluate)     - accuracy
+#   - Loss Function (objective for model to try to minimise)
+#                               - i.e. categorical_crossentropy, mean_squared_error
+#                               - Reference: https://keras.io/losses/
+#   - Optimiser                 - i.e. adam, rmsprop, adagrad, adadelta, adamax, nadam, tfoptimizer, sgd
+#                               - Reference: https://keras.io/optimizers/
+#   - Metrics (to evaluate)     - i.e. accuracy
+#                               - Note: Custom metric function optional
+#                                   - Reference: https://keras.io/getting-started/sequential-model-guide/
 xor.compile(loss="categorical_crossentropy", optimizer="adam", metrics = ['accuracy'])
 
 # Print the model architecture
 # xor.summary()
 
-# Fit the model
+# Training the model on Numpy arrays of input data and labels using the fit() function
 #   - Epoch (Note: Keras 1 nb_epoch; Keras 2 epochs)
 #   - Verbose
 history = xor.fit(X, y, epochs=10, verbose=0)
