@@ -31,7 +31,7 @@ xor = Sequential()
 
 # 1st Layer - Add Hidden Layer with input data of size: 8 and nodes (dimensions): 2
 #   Note: Only required to set input dimensions for first layer since Keras infers shape of remainder
-xor.add(Dense(8, input_dim=2))
+xor.add(Dense(32, input_dim=2))
 
 # 2nd Layer - Add sigmoid activation function layer (i.e. relu, sigmoid, softmax, tanh)
 xor.add(Activation("sigmoid"))
