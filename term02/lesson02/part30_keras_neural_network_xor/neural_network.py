@@ -62,7 +62,7 @@ xor.compile(loss="categorical_crossentropy", optimizer="adam", metrics = ['accur
 # Training the model on Numpy arrays of input data and labels using the fit() function
 #   - Epoch (Note: Keras 1 nb_epoch; Keras 2 epochs)
 #   - Verbose
-history = xor.fit(X, y, epochs=10, verbose=0)
+history = xor.fit(X, y, epochs=1000, verbose=3)
 
 # Scoring and evaluate the model
 score = xor.evaluate(X, y)
