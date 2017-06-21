@@ -48,6 +48,14 @@ for each of its peers it removes that value from the remaining list of possibili
     cd ./term02/lesson02/part30_keras_neural_network_xor; python neural_network.py
     ```
 
+* Convolutional Neural Network (CNN) using Keras
+
+		* Study Dimensionality of Convolutional Layer changes
+		```
+		cd ./term02/lesson03; python conv-dims.py
+        cd ./term02/lesson03; python conv-dims2.py
+		```
+
 Run MyPy Lint (Static Type Checking)
 ------------------------------------
 * Install MyPy `python3 -m pip install mypy`.

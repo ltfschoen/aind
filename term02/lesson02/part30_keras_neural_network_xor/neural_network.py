@@ -46,7 +46,7 @@ xor.add(Activation("softmax"))
 
 # Configure the learning process prior to Training the model.
 # Compile the previously built model
-#   - Loss Function (objective for model to try to minimise)
+#   - Loss (aka Error) Function (objective for model to try to minimise)
 #                               - i.e. categorical_crossentropy, mean_squared_error
 #                               - Reference: https://keras.io/losses/
 #   - Optimiser                 - i.e. adam, rmsprop, adagrad, adadelta, adamax, nadam, tfoptimizer, sgd
