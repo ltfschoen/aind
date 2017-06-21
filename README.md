@@ -56,6 +56,11 @@ for each of its peers it removes that value from the remaining list of possibili
         cd ./term02/lesson03; python conv-dims2.py
 		```
 
+        * Study Max Pooling Layer 
+        ```
+        cd ./term02/lesson03; python pool-dims.py
+        ```
+
 Run MyPy Lint (Static Type Checking)
 ------------------------------------
 * Install MyPy `python3 -m pip install mypy`.
