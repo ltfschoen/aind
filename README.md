@@ -50,7 +50,7 @@ for each of its peers it removes that value from the remaining list of possibili
 
 * Convolutional Neural Network (CNN) using Keras
 
-		* Study Dimensionality of Convolutional Layer changes
+	* Study Dimensionality of Convolutional Layer changes
 		```
 		cd ./term02/lesson03; python conv-dims.py
         cd ./term02/lesson03; python conv-dims2.py
@@ -60,6 +60,21 @@ for each of its peers it removes that value from the remaining list of possibili
         ```
         cd ./term02/lesson03; python pool-dims.py
         ```
+
+* Recurrent Neural Network (RNN) using Keras
+
+    * Plot Recursive Sequence
+        ```
+        cd ./term02/lesson04; python recursive_sequence.py
+        ```
+
+        ![alt tag](https://raw.githubusercontent.com/ltfschoen/aind/master/screenshots/recursion.png)
+
+* Natural Language Processing (NLP)
+
+        ```
+        cd ./term02/lesson07_nlp_intro; python count_words.py
+        ```    
 
 Run MyPy Lint (Static Type Checking)
 ------------------------------------
